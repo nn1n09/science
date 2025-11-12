@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>물리학 시뮬레이션 - 자유낙하 vs 항력</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <link rel="stylesheet" href="styles2.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1 class="app-title">
+                물리학 시뮬레이션
+            </h1>
+        </header>
+
+        <main class="main-content">
+            <aside class="control-panel">
+                <div class="panel-header">
+                    <h2>시뮬레이션 설정</h2>
+                </div>
+
+                <form class="controls-form" id="controlsForm">
+                    <div class="input-group">
+                        <label for="massInput">질량 (kg)</label>
+                        <input type="number" id="massInput" min="0.1" max="1000" step="0.1" value="70" readonly>
+                        <span class="input-unit">kg</span>
+                        <div class="error-message" id="massError"></div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="heightInput">초기 높이 (m)</label>
+                        <input type="number" id="heightInput" min="0" max="1000" step="0.1" value="100" readonly>
+                        <span class="input-unit">m</span>
+                        <div class="error-message" id="heightError"></div>
+                    </div>
+
+                    <div class="constants-info">
+                        <h3>고정 상수</h3>
+                        <div class="constant-item">
+                            <span>중력가속도 (g):</span>
+                            <span>9.8 m/s²</span>
+                        </div>
+                        <div class="constant-item">
+                            <span>탄성계수 (e):</span>
+                            <span>0.7</span>
+                        </div>
+                        <div class="constant-item">
+                            <span>항력계수 (k):</span>
+                            <span>1.2 kg/s</span>
+                        </div>
+                        <div class="constant-item">
+                            <span>초기 속도 (v₀):</span>
+                            <span>0 m/s</span>
+                        </div>
+                    </div>
+                    <div class="chart-controls">
+                        <button type="button" id="downloadChartBtn" class="btn">
+                            그래프 다운로드
+                        </button>
+                    </div>
+                    <div class="action-buttons">
+                        <button type="button" id="runBtn" class="btn btn-primary">
+                            입력 페이지로 돌아가기
+                        </button>
+                    </div>
+                </form>
+
+            </aside>
+
+            <section class="charts-container">
+                <div class="chart-wrapper">
+                    <h3 class="chart-title">높이 - 시간 그래프</h3>
+                    <div class="chart-container">
+                        <canvas id="heightChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #3B82F6;"></div>
+                        <span>자유낙하</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #ef4444;"></div>
+                        <span>항력 포함</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <div id="loadingOverlay" class="loading-overlay hidden">
+            <div class="loading-spinner">
+                <div class="spinner"></div>
+                <p>시뮬레이션 계산 중...</p>
+            </div>
+        </div>
+
+        <div id="toastContainer" class="toast-container"></div>
+    </div>
+
+    <script src="chart-manager.js"></script>
+    <script src="main2.js"></script>
+</body>
+</html>
